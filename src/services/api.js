@@ -9,7 +9,6 @@ const api = axios.create({
   },
 });
 
-// Interceptor to attach JWT token to all requests if present
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('leaddesk_token');
@@ -21,12 +20,10 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response interceptor for handling 401 unauth
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      // If token expired or invalid, clear local auth
       if (window.location.pathname.startsWith('/admin') && window.location.pathname !== '/admin/login') {
         localStorage.removeItem('leaddesk_token');
         localStorage.removeItem('leaddesk_user');

@@ -8,7 +8,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:5170',
+        target: 'https://lead-backend-nine.vercel.app',
         changeOrigin: true,
       },
     },
